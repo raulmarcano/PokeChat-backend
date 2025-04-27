@@ -17,7 +17,8 @@ app.add_middleware(
 async def chat(request: Request):
     data = await request.json()
     user_input = data.get("message")
+    resp_id = data.get("resp_id")
     print(f"Mensaje recibido del frontend: {user_input}")
-    response_text = get_response(user_input)
-    return JSONResponse(content={"response": response_text})
+    response_text, resp_id = get_response(user_input, resp_id)
+    return JSONResponse(content={"response": response_text, "response_id": resp_id})
 
